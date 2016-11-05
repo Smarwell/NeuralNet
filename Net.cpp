@@ -6,10 +6,10 @@
 using namespace std;
 
 Net::Net(int num_input_nodes, int num_layers, int layer_height, int num_output_nodes) {
-	input_nodes = num_input_nodes;
+	input_nodes = num_input_nodes+1;
 	layers.push_back(*new vector<Neuron>);
 	for (int i = 0; i < layer_height; i++) {
-		layers[0].push_back(*new Neuron(num_input_nodes));
+		layers[0].push_back(*new Neuron(input_nodes));
 	}
 	for (int i = 1; i < num_layers; i++) {
 		layers.push_back(*new vector<Neuron>);
@@ -71,12 +71,18 @@ void Net::reset() {
 }
 
 vector<float>* Net::eval(vector<float>& inputs) {
-	if (inputs.size() != input_nodes) throw exception("Net input size must match input nodes");
-	for (int i = 0; i < input_nodes; i++) {
+	if (inputs.size() != input_nodes - 1) {
+		cout << "Net input size must match input nodes" << endl;
+		throw exception();
+	}
+	for (int i = 0; i < input_nodes-1; i++) {
 		for (Neuron& neuron : layers[0]) {
 			neuron.reset();
 			neuron.send_input(i, inputs[i]);
 		}
+	}
+	for (Neuron& neuron : layers[0]) {
+		neuron.send_input(input_nodes-1, 1);
 	}
 	for (size_t i = 1; i < layers.size(); i++) {
 		for (Neuron& neuron : layers[i]) {

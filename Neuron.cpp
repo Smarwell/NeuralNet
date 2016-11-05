@@ -3,11 +3,11 @@
 #include "Neuron.h"
 
 const float odds_zero = 0.01f;
-const float odds_one = 0.01f;
-const float odds_negate = 0.01f;
-const float odds_neg_one = 0.01f;
+const float odds_one = 0.00f;
+const float odds_negate = 0.05f;
+const float odds_neg_one = 0.00f;
 const float odds_vary = .1f;
-const float max_diff = 0.05f;
+const float max_diff = 5.f;
 
 float chance;
 float odds_accum;

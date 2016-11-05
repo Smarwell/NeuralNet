@@ -21,7 +21,7 @@ public:
 	void mutate();
 
 	void send_input(int id, float input) { value += weights[id] * input; }
-	float get_value() { return value; }
+	float get_value() { return 1/(1+pow(2.718,value)); }
 	void reset() { value = 0; }
 
 };
