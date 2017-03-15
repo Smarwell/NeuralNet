@@ -1,5 +1,5 @@
 
-#include "Net.h"
+#include "NNWrapper/Net.h"
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
